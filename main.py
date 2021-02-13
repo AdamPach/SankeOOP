@@ -52,14 +52,13 @@ class Game:
                         self.__snake.zmenSmerHada(-SIZE_OF_BLOCKS, 0)
                     elif event.type == pygame.KEYDOWN and event.key == pygame.K_d:   #DOPRAVA
                         self.__snake.zmenSmerHada(SIZE_OF_BLOCKS, 0)
-                lastPartOfSnake = self.__snake.returnLastPartOfSnake()
                 self.__snake.snakeMovement(self.__berry)
                 for event in pygame.event.get():
                     if event.type == SNAKE_COLIDE_WALL:
                         self.__zivot = False
                     if event.type == SNAKE_ATE_BERRY:
-                        print("Snake ate berry")
                         self.__berry.generateNewBerry()
+
                 self.__draw()
             else:
                 clock.tick(FPS)
@@ -114,18 +113,20 @@ class Snake:
                 if self.__snake[0].y + self.__smerHada_y >= WINDOW_HEIGHT or self.__snake[0].y + self.__smerHada_y < 0:
                     pygame.event.post(pygame.event.Event(SNAKE_COLIDE_WALL))
                 else:
+                    lastPartOfSnake = self.__returnLastPartOfSnake()
                     snakeCopy = self.__snake[:-1]
                     snakeCopy.insert(0, pygame.Rect(snakeCopy[0].x + self.__smerHada_x, snakeCopy[0].y + self.__smerHada_y, SIZE_OF_BLOCKS, SIZE_OF_BLOCKS))
                     self.__snake = snakeCopy
-                    self.__snakeAteBerry(berry)
+                    self.__snakeAteBerry(berry, lastPartOfSnake)
 
-    def returnLastPartOfSnake(self):
+    def __returnLastPartOfSnake(self):
         snakeLength = len(self.__snake)
         lastPartOfSnake = self.__snake[snakeLength - 1]
         return lastPartOfSnake
 
-    def __snakeAteBerry(self, berry):
+    def __snakeAteBerry(self, berry, lastPartOfSnake):
         if self.__snake[0].colliderect(berry.returnBerry()):
+            self.__snake.append(lastPartOfSnake)
             pygame.event.post(pygame.event.Event(SNAKE_ATE_BERRY))
 
 class Berry:
