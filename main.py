@@ -9,7 +9,7 @@ WINDOW = pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HEIGHT))
 pygame.display.set_caption("PySnake!")
 
 
-SIZE_OF_BLOCKS = 20
+SIZE_OF_BLOCKS = 30
 
 BLOCK_WIDTH = WINDOW_WIDTH // SIZE_OF_BLOCKS
 BLOCK_HEIGHT = WINDOW_HEIGHT // SIZE_OF_BLOCKS
@@ -19,6 +19,7 @@ FPS = 4
 #COLORS
 LIGHT_GREEN = (105, 209, 84)
 DARK_GREEN = (45, 117, 30)
+BLUE = (43, 122, 186)
 
 class Game:
 
@@ -45,6 +46,9 @@ class Game:
 
     def __draw(self):
         self.__draw_playground()
+        snake = self.__snake.returnSnake()
+        for partOfSnake in snake:
+            pygame.draw.rect(WINDOW, BLUE, partOfSnake)
         pygame.display.update()
 
 
@@ -61,8 +65,11 @@ class Game:
 class Snake:
 
     def __init__(self):
-        pass
+        self.__snake = [pygame.Rect(WINDOW_WIDTH // 2,WINDOW_HEIGHT // 2,SIZE_OF_BLOCKS, SIZE_OF_BLOCKS),pygame.Rect(WINDOW_WIDTH // 2 - SIZE_OF_BLOCKS,WINDOW_HEIGHT // 2,SIZE_OF_BLOCKS, SIZE_OF_BLOCKS),pygame.Rect(WINDOW_WIDTH // 2 - SIZE_OF_BLOCKS * 2,WINDOW_HEIGHT // 2,SIZE_OF_BLOCKS, SIZE_OF_BLOCKS)]
 
+
+    def returnSnake(self):
+        return self.__snake
 
 class Berry:
 
