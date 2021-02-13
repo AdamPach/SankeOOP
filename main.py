@@ -3,13 +3,13 @@ from random import randint
 import os
 
 #WINDOW
-WINDOW_WIDTH = 480
-WINDOW_HEIGHT = 480
+WINDOW_WIDTH = 900
+WINDOW_HEIGHT = 900
 WINDOW = pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HEIGHT))
 pygame.display.set_caption("PySnake!")
 
 
-SIZE_OF_BLOCKS = 20
+SIZE_OF_BLOCKS = 50
 
 BLOCK_WIDTH = WINDOW_WIDTH // SIZE_OF_BLOCKS
 BLOCK_HEIGHT = WINDOW_HEIGHT // SIZE_OF_BLOCKS
