@@ -20,8 +20,10 @@ FPS = 4
 LIGHT_GREEN = (105, 209, 84)
 DARK_GREEN = (45, 117, 30)
 BLUE = (43, 122, 186)
+RED = (186, 43, 43)
 
 SNAKE_COLIDE_WALL = pygame.USEREVENT + 1
+SNAKE_ATE_BERRY = pygame.USEREVENT + 2
 
 class Game:
 
@@ -68,8 +70,10 @@ class Game:
     def __draw(self):
         self.__draw_playground()
         snake = self.__snake.returnSnake()
+        berry = self.__berry.returnBerry()
         for partOfSnake in snake:
             pygame.draw.rect(WINDOW, BLUE, partOfSnake)
+        pygame.draw.rect(WINDOW, RED, berry)
         pygame.display.update()
 
 
@@ -119,7 +123,13 @@ class Snake:
 class Berry:
 
     def __init__(self):
-        pass
+        self.__berry = pygame.Rect(randint(0, BLOCK_WIDTH - 1) * 10, randint(0, BLOCK_HEIGHT - 1) * 10, SIZE_OF_BLOCKS, SIZE_OF_BLOCKS)
+
+    def returnBerry(self):
+        return self.__berry
+
+    def generateNewBerry(self):
+        self.__berry = pygame.Rect(randint(0, BLOCK_WIDTH - 1) * 10, randint(0, BLOCK_HEIGHT - 1) * 10, SIZE_OF_BLOCKS, SIZE_OF_BLOCKS)
 
 
 if __name__ == '__main__':
