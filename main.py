@@ -24,6 +24,7 @@ RED = (186, 43, 43)
 
 SNAKE_COLIDE_WALL = pygame.USEREVENT + 1
 SNAKE_ATE_BERRY = pygame.USEREVENT + 2
+SNAKE_ATE_HIMSELF = pygame.USEREVENT + 3
 
 class Game:
 
@@ -56,7 +57,9 @@ class Game:
                 for event in pygame.event.get():
                     if event.type == SNAKE_COLIDE_WALL:
                         self.__zivot = False
-                    if event.type == SNAKE_ATE_BERRY:
+                    elif event.type == SNAKE_ATE_HIMSELF:
+                        self.__zivot = False
+                    elif event.type == SNAKE_ATE_BERRY:
                         self.__berry.generateNewBerry()
 
                 self.__draw()
@@ -118,6 +121,7 @@ class Snake:
                     snakeCopy.insert(0, pygame.Rect(snakeCopy[0].x + self.__smerHada_x, snakeCopy[0].y + self.__smerHada_y, SIZE_OF_BLOCKS, SIZE_OF_BLOCKS))
                     self.__snake = snakeCopy
                     self.__snakeAteBerry(berry, lastPartOfSnake)
+                    self.__snakeAteHimself()
 
     def __returnLastPartOfSnake(self):
         snakeLength = len(self.__snake)
@@ -128,6 +132,13 @@ class Snake:
         if self.__snake[0].colliderect(berry.returnBerry()):
             self.__snake.append(lastPartOfSnake)
             pygame.event.post(pygame.event.Event(SNAKE_ATE_BERRY))
+
+    def __snakeAteHimself(self):
+        for index in range(len(self.__snake)):
+            if index == 0:
+                pass
+            elif self.__snake[0].colliderect(self.__snake[index]):
+                pygame.event.post(pygame.event.Event(SNAKE_ATE_HIMSELF))
 
 class Berry:
 
