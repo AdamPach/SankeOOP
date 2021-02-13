@@ -34,6 +34,7 @@ KALETA_OBLICEJ = pygame.image.load(os.path.join("Assets","kaleta.png"))
 MIKYR = pygame.transform.scale(MIKYR_OBLICEJ, (SIZE_OF_BLOCKS, SIZE_OF_BLOCKS))
 KALETA = pygame.transform.scale(KALETA_OBLICEJ, (SIZE_OF_BLOCKS, SIZE_OF_BLOCKS))
 
+
 class Game:
 
     def __init__(self):
@@ -52,6 +53,19 @@ class Game:
         #ZVUKOV0 EFEKTY
         pygame.mixer.init()
         self.__boss = pygame.mixer.Sound(os.path.join("Assets", "boss.wav"))
+        self.__HUDBA_K_JIDLU = [pygame.mixer.Sound(os.path.join("Assets/Jidlo", "baba.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "chyba.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "dobre.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "konecnik.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "mrknout.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "obchodniku.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "oleje.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "porno.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "pozornost.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "pychyby.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "vesmir.wav")),
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "zrychlit.wav")),
+                        ]
 
     def playGame(self):
         clock = pygame.time.Clock()
@@ -82,6 +96,8 @@ class Game:
                     elif event.type == SNAKE_ATE_BERRY:
                         self.__berry.generateNewBerry()
                         self.__points += 1
+                        SONG = self.__hudbaPriJezeni()
+                        SONG.play()
 
                 self.__draw()
             else:
@@ -121,6 +137,10 @@ class Game:
             WINDOW.blit(TEXT2, (WINDOW_WIDTH * 0.01, WINDOW_HEIGHT * 0.4))
             WINDOW.blit(TEXT, (WINDOW_WIDTH * 0.35, WINDOW_HEIGHT * 0.45))
         pygame.display.update()
+
+    def __hudbaPriJezeni(self):
+        index = randint(0, len(self.__HUDBA_K_JIDLU) - 1)
+        return self.__HUDBA_K_JIDLU[index]
 
 
     def __draw_playground(self):
