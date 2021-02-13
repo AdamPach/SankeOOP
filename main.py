@@ -123,13 +123,13 @@ class Snake:
 class Berry:
 
     def __init__(self):
-        self.__berry = pygame.Rect(randint(0, BLOCK_WIDTH - 1) * 10, randint(0, BLOCK_HEIGHT - 1) * 10, SIZE_OF_BLOCKS, SIZE_OF_BLOCKS)
+        self.__berry = pygame.Rect(randint(0, BLOCK_WIDTH - 1) * SIZE_OF_BLOCKS, randint(0, BLOCK_HEIGHT - 1) * SIZE_OF_BLOCKS, SIZE_OF_BLOCKS, SIZE_OF_BLOCKS)
 
     def returnBerry(self):
         return self.__berry
 
     def generateNewBerry(self):
-        self.__berry = pygame.Rect(randint(0, BLOCK_WIDTH - 1) * 10, randint(0, BLOCK_HEIGHT - 1) * 10, SIZE_OF_BLOCKS, SIZE_OF_BLOCKS)
+        self.__berry = pygame.Rect(randint(0, BLOCK_WIDTH - 1) * SIZE_OF_BLOCKS, randint(0, BLOCK_HEIGHT - 1) * SIZE_OF_BLOCKS, SIZE_OF_BLOCKS, SIZE_OF_BLOCKS)
 
 
 if __name__ == '__main__':
