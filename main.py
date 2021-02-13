@@ -64,8 +64,7 @@ class Game:
                                 pygame.mixer.Sound(os.path.join("Assets/Jidlo", "pozornost.wav")),
                                 pygame.mixer.Sound(os.path.join("Assets/Jidlo", "pychyby.wav")),
                                 pygame.mixer.Sound(os.path.join("Assets/Jidlo", "vesmir.wav")),
-                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "zrychlit.wav")),
-                        ]
+                                pygame.mixer.Sound(os.path.join("Assets/Jidlo", "zrychlit.wav")),]
 
     def playGame(self):
         clock = pygame.time.Clock()
@@ -162,6 +161,7 @@ class Game:
 
     def __restartGame(self):
         self.__zivot = True
+        self.__points = 0
         self.__snake.restartSnake()
         self.__berry.generateNewBerry()
 
