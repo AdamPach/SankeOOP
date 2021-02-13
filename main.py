@@ -49,6 +49,10 @@ class Game:
         pygame.font.init()
         self.__font = pygame.font.SysFont("comicsans", 40)
 
+        #ZVUKOV0 EFEKTY
+        pygame.mixer.init()
+        self.__boss = pygame.mixer.Sound(os.path.join("Assets", "boss.wav"))
+
     def playGame(self):
         clock = pygame.time.Clock()
         while self.__run:
@@ -71,8 +75,10 @@ class Game:
                 for event in pygame.event.get():
                     if event.type == SNAKE_COLIDE_WALL:
                         self.__zivot = False
+                        self.__boss.play()
                     elif event.type == SNAKE_ATE_HIMSELF:
                         self.__zivot = False
+                        self.__boss.play()
                     elif event.type == SNAKE_ATE_BERRY:
                         self.__berry.generateNewBerry()
                         self.__points += 1
